@@ -13,6 +13,9 @@ import argparse
 EPISODE_LABEL = "Episode: {}/{}"
 FRAME_LABEL = "Frame: {}/{}"
 FPS_LABEL = "Speed: {} fps"
+LINEAR_LABEL = "Linear velocity (z): {}"
+ANGULAR_LABEL = "Angular velocity (x): {}"
+
 
 COUNT_EPISODES = True
 
@@ -26,6 +29,24 @@ class LogViewer:
     def frame_index(self, value):
         self._frame_index = value
         self._frame_label.set(FRAME_LABEL.format(self._frame_index, self.nb_frames))
+
+    @property
+    def angular(self):
+        return self._angular or 0
+
+    @angular.setter
+    def angular(self, value):
+        self._angular = value
+        self._angular_label.set(ANGULAR_LABEL.format(self._angular))
+
+    @property
+    def linear(self):
+        return self._linear or 0
+
+    @linear.setter
+    def linear(self, value):
+        self._linear = value
+        self._linear_label.set(LINEAR_LABEL.format(self._linear))
 
     @property
     def episode_index(self):
@@ -88,9 +109,13 @@ class LogViewer:
         self.shutdown(signum=0)
 
     def init_vars(self):
+        self._angular_label = tk.StringVar()
+        self._linear_label = tk.StringVar()
         self._episode_label = tk.StringVar()
         self._frame_label = tk.StringVar()
         self._fps_label = tk.StringVar()
+        self.angular = 0
+        self.linear = 0
         self.nb_episodes = -1
         self.nb_frames = 0
         self.FPS = 45
@@ -129,6 +154,12 @@ class LogViewer:
 
         self.info_fps = tk.Label(self.info_frame, textvariable=self._fps_label)
         self.info_fps.grid(row=1, column=1, sticky=tk.W)
+
+        self.info_linear = tk.Label(self.info_frame, textvariable=self._linear_label)
+        self.info_linear.grid(row=0, column=2, sticky=tk.W)
+
+        self.info_angular = tk.Label(self.info_frame, textvariable=self._angular_label)
+        self.info_angular.grid(row=1, column=2, sticky=tk.W)
 
         self.info_speeddown = tk.Button(self.info_frame, text="slower", command=self.speeddown)
         self.info_speeddown.grid(row=2, column=0)
@@ -181,6 +212,7 @@ class LogViewer:
         try:
             # sample = self.data[self.frame]['step'][0]
             sample = self.episode_data.steps[self.frame_index].obs
+            action = self.episode_data.steps[self.frame_index].action
         except IndexError:
             print("Episode end...")
             # self.next_episode()
@@ -188,6 +220,8 @@ class LogViewer:
             self.root.after(int(1000), lambda: self.update_image())
             return
         self.frame_index += 1
+        self.angular = round(action[1],3)
+        self.linear = round(action[0],3)
         img_array = Image.fromarray(sample)
         # if not (self.width, self.height) == (200, 150):
         #     # img_array = img_array.resize((self.width, self.height))
