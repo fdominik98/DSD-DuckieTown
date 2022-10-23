@@ -47,3 +47,5 @@ For visualizing our data we used a tool, [log_viewer.py](https://github.com/fdom
 ![log_viewr](images/logimage.png)
 
 There are also a 1 minute recording of the captured log at [humandataset](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing)
+
+We modified the original log_viewer.py so that it shows the linear and angular velocities for each frame.
