@@ -33,12 +33,17 @@ Our map is generated using the [generator.py](https://github.com/fdominik98/DSD-
 We used the script with the following main configurations:
 - Map name: [MyMap](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_1/map/MyMap.yaml)
 - Domain randomization: true (uses the simulators built in domain randomizator)
-- Log file: [humandataset.log](https://drive.google.com/file/d/1aLgfToGGLPrzI_pxuOo1Tpe8u5cbcz1W/view?usp=sharing) (the output)
+- Log file: [humandataset.log](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing) (the output)
 
 We used an XBOX ONE controller for the driving and modified a base code to personalize the controlling.
 
-After driving and generating for half an hour (keeping only the quality data), we managed to create a dataset of 500 MB which we will expand further when needed. [humandataset.log](https://drive.google.com/file/d/1aLgfToGGLPrzI_pxuOo1Tpe8u5cbcz1W/view?usp=sharing)
+After driving and generating for half an hour (keeping only the quality data), we managed to create a dataset of 500 MB which we will expand further when needed. [humandataset.log](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing)
 
 ### File format and visualization
 
+Briefly the log file contains a list of frames and actions. For each frame there is an action to take which is repsresented in linear and angular velocity. The first version of our dataset now consists of 6074 list items.
 
+For visualizing our data we used a tool, [log_viewer.py](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_1/dataVisualization/log_viewer.py) originated from [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning). With this utility we can see the recorded frames in order (as a video): <br>
+![log_viewr](images/logimage.png)
+
+There are also a 1 minute recording of the captured log at [humandataset](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing)
