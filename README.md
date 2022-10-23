@@ -41,11 +41,11 @@ After driving and generating for half an hour (keeping only the quality data), w
 
 ### File format and visualization
 
-Briefly the log file contains a list of frames and actions. For each frame there is an action to take which is repsresented in linear and angular velocity. The size of each image is 150x200 pixels and the linear and angular velocities come in lists of floats with two element. The first version of our dataset now consists of 6074 list items.
+Briefly the log file contains a list of frames and actions. For each frame there is an action to take which is repsresented in linear and angular velocity. The size of each image is **150x200** pixels and the linear and angular velocities come in lists of floats with two element. The first version of our dataset now consists of 6074 list items.
 
 For visualizing our data we used a tool, [log_viewer.py](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_1/dataVisualization/log_viewer.py) originated from [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning). With this utility we can see the recorded frames in order (as a video): <br>
 ![log_viewr](images/logimage.png)
 
-There are also a 1 minute recording of the captured log at [humandataset](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing)
+There are also a 1 minute recording of the captured log at [humandataset](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing) by the name of **logcapture.webm**
 
-We modified the original log_viewer.py so that it shows the linear and angular velocities for each frame.
+We modified the original **log_viewer**.py so that it shows the linear and angular velocities for each frame.
