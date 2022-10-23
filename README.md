@@ -49,3 +49,7 @@ For visualizing our data we used a tool, [log_viewer.py](https://github.com/fdom
 There are also a 1 minute recording of the captured log at [dataset](https://drive.google.com/drive/folders/1HAE6eQeRWJcNAe7YSUJVAuf9-UTMRLAq?usp=sharing) by the name of **logcapture.webm**
 
 We modified the original **log_viewer**.py so that it shows the linear and angular velocities for each frame.
+
+### Creating train, test and validation sets
+
+In code, the dataset can be read by the [log_reader.py](https://github.com/fdominik98/DSD-DuckieTown/tree/milestone_1/training/log_reader.py) module also taken from [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning). The output of its **modern_read()** function is a tuple {frames, linear velocities, angular velocities}. These lists can be easily split into train, test and validation subsets by using **sklearn.model_selection** modules **train_test_split()** method.
