@@ -61,7 +61,7 @@ TILE_TYPES = (
 )
 
 # the file onto which we write the output
-f = open("MyMap.yaml", "w+")
+f = open("MyMap_test.yaml", "w+")
 
 # generates grid, writes it to file,
 # generates objects, writes them to file
