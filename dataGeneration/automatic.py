@@ -24,7 +24,7 @@ REWARD_INVALID_POSE = -1000
 
 
 class DataGenerator:
-    def __init__(self, env, max_episodes, max_steps, log_file=None, downscale=False):
+    def __init__(self, env, max_episodes, max_steps, log_file=None, downscale=True):
         if not log_file:
             log_file = f"dataset.log"
         self.env = env
@@ -148,7 +148,8 @@ class DataGenerator:
                 # print(f"Saved image shape: {cropped.shape}")
 
             step = Step(output_img, reward, action, done)
-            self.logger.log(step, info)
+            if reward >= 0.6:
+                self.logger.log(step, info)
             # rawlog.log(obs, action, reward, done, info)
             # last_reward = reward
 
@@ -178,7 +179,7 @@ if __name__ == "__main__":
     parser.add_argument("--steps", default=1000, help="number of steps to record in one batch", type=int)
     parser.add_argument("--nb-episodes", default=10, type=int)
     parser.add_argument("--logfile", type=str, default=None)
-    parser.add_argument("--downscale", action="store_true")
+    parser.add_argument("--downscale", action="store_true", default=True)
 
     args = parser.parse_args()
 

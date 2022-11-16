@@ -25,6 +25,10 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Dataset
+**/dataset.log
+**/test_dataset.log
 MANIFEST
 
 # PyInstaller
