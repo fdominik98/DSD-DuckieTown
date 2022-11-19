@@ -58,7 +58,19 @@ In code, the dataset can be read by the [log_reader.py](https://github.com/fdomi
 ## Milestone 2: Training the model
 
 ### Training on train set
+In the graphs below dark blue is the train dataset and light blue is the validation dataset. The faint lines are the original graphs and the not faint lines are the smoothed lines made by TensorBoard Smoothing with value 0,4.
+First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (minsquare error) function in the model.
 
+#### Angular loss
+![angular_loss](images/Angular_loss.jpg)
+<br>We can see that the loss is decreasing continously in the train dataset, but there is a little hill in the validation dataset. Also angular loss is bigger than linear loss
+#### Linear loss
+![linear_loss](images/Linear_loss.jpg)
+<br>Linear loss values are pretty little which is good, we can see when we reach epoch 14, the loss is < 0.02
+#### Epoch loss
+![epoch_loss](images/Epoch_loss.jpg)
+
+With this model we could achieve this result, but we hope we can do better.
 ### Preparing test set
 
 #### Generating new map
