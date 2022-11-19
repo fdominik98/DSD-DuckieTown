@@ -1,4 +1,4 @@
-# Team: DSD
+# Team: DSD (DuckieTown project)
 Repository for autonomous driving in DuckieTown environment developed by the DSD team.
 
 Team members:
@@ -53,3 +53,12 @@ We modified the original **log_viewer**.py so that it shows the linear and angul
 ### Creating train, test and validation sets
 
 In code, the dataset can be read by the [log_reader.py](https://github.com/fdominik98/DSD-DuckieTown/tree/milestone_1/training/log_reader.py) module also taken from [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning). The output of its **modern_read()** function is a tuple {frames, linear velocities, angular velocities}. These lists can be easily split into train, test and validation subsets by using **sklearn.model_selection** modules **train_test_split()** method.
+
+
+## Milestone 2: Training the model
+
+### Training on train set
+
+### Preparing test set
+
+### Evaluating the model

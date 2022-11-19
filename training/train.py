@@ -110,7 +110,7 @@ class DuckieTrainer:
 
     def configure_callbacks(self):
         tensorboard = tf.keras.callbacks.TensorBoard(
-            log_dir="trainlogs/{}".format(f'{MODEL_NAME}-{datetime.now().strftime("%Y-%m-%d@%H:%M:%S")}')
+            log_dir="trainlogs/{}".format(f'{MODEL_NAME}-{datetime.now().strftime("%Y-%m-%d@%H-%M-%S")}')
         )
 
         filepath1 = f"trainedModel/{MODEL_NAME}Best_Validation.h5"
