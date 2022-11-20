@@ -58,8 +58,12 @@ In code, the dataset can be read by the [log_reader.py](https://github.com/fdomi
 ## Milestone 2: Training the model
 
 ### Training on train set
+
+#### The training
+During training we used the data we have already created during working on the first milestone. Since we have chosen behavior cloning as our aproach, the error of the model is highly dependent of the behaivor we are trying to clone. We are using a Convolutional Neural Network rigth now, which seems to be promising, but we have already considered trying out other approaches like Recurrent Neural Networks or Variational Autoencoders. It is not clear to us yet, which modell will be the best for the scope of the project this semester though. The aspects we are planning to consider during further evaluations of theese models are contains the accuracy, the prediction time, and the learning time. Two of us has succesfully set up their environments to use GPUs for training the models, in order to speed up the workflow.
+
 In the graphs below dark blue is the train dataset and light blue is the validation dataset. The faint lines are the original graphs and the not faint lines are the smoothed lines made by TensorBoard Smoothing with value 0,4.
-First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (meansquare error) function in the model.
+First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (mean squared error) function in the model.
 
 #### Angular loss
 ![angular_loss](images/Angular_loss.jpg)
