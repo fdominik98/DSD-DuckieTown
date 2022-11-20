@@ -60,18 +60,32 @@ In code, the dataset can be read by the [log_reader.py](https://github.com/fdomi
 ### Training on train set
 
 #### The training
-During training we used the data we have already created during working on the first milestone. Since we have chosen behavior cloning as our aproach, the error of the model is highly dependent of the behaivor we are trying to clone. We are using a Convolutional Neural Network rigth now, which seems to be promising, but we have already considered trying out other approaches like Recurrent Neural Networks or Variational Autoencoders. It is not clear to us yet, which modell will be the best for the scope of the project this semester though. The aspects we are planning to consider during further evaluations of theese models are contains the accuracy, the prediction time, and the learning time. Two of us has succesfully set up their environments to use GPUs for training the models, in order to speed up the workflow.
+During training, we used the data we have already created during working on the first milestone. Since we have chosen behavior cloning as our aproach, the error of the model is highly dependent of the behavior we are trying to clone. We are using a Convolutional Neural Network right now, which seems to be promising, but we have already considered trying out other approaches like Recurrent Neural Networks or Variational Auto-encoders. It is not clear to us yet, which model will be the best for the scope of the project this semester though. The aspects we are planning to consider during further evaluations of these models are contains the accuracy, the prediction time, and the learning time. Two of us has successfully set up their environments to use GPUs for training the models, in order to speed up the workflow.
+
+For the training, the [script (train.py)](https://github.com/fdominik98/DSD-DuckieTown/tree/main/training/train.py)
+and the [model (my_model.py)](https://github.com/fdominik98/DSD-DuckieTown/tree/main/training/my_model.py)
+we used is originated at the [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning) repository.
+We modified these two to match our desires.
+
+The *train.py* can be used the following way:
+ - Copy the dataset into the training directory.
+ - Run *python train.py*
+
+Or
+ - specify the --log_file {path to dataset} options while executing *python train.py*
+
+#### Training results
 
 In the graphs below dark blue is the train dataset and light blue is the validation dataset. The faint lines are the original graphs and the not faint lines are the smoothed lines made by TensorBoard Smoothing with value 0,4.
 First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (mean squared error) function in the model.
 
-#### Angular loss
+##### Angular loss
 ![angular_loss](images/Angular_loss.jpg)
 <br>We can see that the loss is decreasing continously in the train dataset, but there is a little hill in the validation dataset. Also angular loss is bigger than linear loss
-#### Linear loss
+##### Linear loss
 ![linear_loss](images/Linear_loss.jpg)
 <br>Linear loss values are pretty little which is good, we can see when we reach epoch 14, the loss is < 0.02
-#### Epoch loss
+##### Epoch loss
 ![epoch_loss](images/Epoch_loss.jpg)
 
 With this model we could achieve this result, but we hope we can do better.

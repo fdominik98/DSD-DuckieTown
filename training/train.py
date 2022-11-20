@@ -144,19 +144,6 @@ class DuckieTrainer:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Training Parameter Setup")
-
-    parser.add_argument(
-        "--experimental",
-        help="Set if to use the experimental data loading method.",
-        action="store_true",
-        default=EXPERIMENTAL,
-    )
-    parser.add_argument(
-        "--old_dataset",
-        help="Set to use the old data log format",
-        action="store_true",
-        default=OLD_DATASET,
-    )
     parser.add_argument("--epochs", help="Set the total training epochs", default=EPOCHS)
     parser.add_argument("--learning_rate", help="Set the initial learning rate", default=INIT_LR)
     parser.add_argument("--batch_size", help="Set the batch size", default=BATCH_SIZE)
