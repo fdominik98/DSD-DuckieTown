@@ -9,6 +9,41 @@ Team members:
 
 The goal of this project is to train and test a self-driving AI vehicle in the Duckie Town World simulation. During our work, we are planning to use a TensorFlow based imitation learning algorithm. We are starting out from the base project [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning) which contains utilities for data generation, data visualisation, model training and model testing. Apart from that we will use various open source Duckie Town repositories which will be mentioned as we advance. Certain components of these projects will be integrated into our own solution as we modified and expanded them with new ideas and solutions to reach better results.
 
+## Installing the project
+
+You can install all dependencies except for cuda tools using the following commands on linux machine:
+
+~~~
+git clone https://github.com/fdominik98/DSD-DuckieTown.git
+cd DSD-DuckieTown
+pip3 install -e .
+~~~
+
+## Using the project
+
+### Training
+
+For training a model these steps shall be done:
+ 1. Copy the training dataset to DSD-DuckieTown/training
+ 2. run the following command:
+ ~~~
+ python3 train.py --log_file {name_of_the_training_dataset_file_with_extension}
+ ~~~
+ 3. Check the train results running:
+
+~~~
+tensorboard --logdir trainlogs
+~~~
+ 
+ ### Evaluating
+ 1. Copy the test dataset to DSD-DuckieTown/evaluation
+ 2. Copy the trained .h5 model to DSD-DuckieTown/evaluation
+ 3. run the following command:
+ ~~~
+ python3 eval.py --log_file {name_of_the_test_dataset_file_with_extension} --model_path {name_of_the_trained_model_with_extension}
+ ~~~
+ 
+
 ## Milestone 1: Preparing data
 
 To collect a proper amount of data for training our model we are using the Duckie Town Simulator available at [Gym Duckie Town](https://github.com/duckietown/gym-duckietown). We are generating data while driving the vehicle in the simulator, capturing images assigned with the appropriate action (linear and angular velocity).
