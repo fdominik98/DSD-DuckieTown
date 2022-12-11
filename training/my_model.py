@@ -60,7 +60,7 @@ class MyModel:
         return x
 
     @staticmethod
-    def build(width=150, height=200):
+    def build(width=200, height=150):
         input_shape = (height, width, 3)
         inputs = tf.keras.Input(shape=input_shape)
         linearVelocity = MyModel.build_linear_branch(inputs)

@@ -1,0 +1,9 @@
+tensorboard
+tensorflow
+numpy
+opencv-python
+scikit-learn
+tqdm
+duckietown-gym-daffy
+pipdeptree
+typing-extensions

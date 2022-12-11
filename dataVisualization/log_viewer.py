@@ -319,7 +319,7 @@ class LogViewer:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--log_name", default="dataset.log")
+    parser.add_argument("--log_name", default="extended_dataset.log")
     args = parser.parse_args()
     FILE_NAME = args.log_name
     LogViewer()
