@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--batch_size", help="Set the batch size", default=128)
     parser.add_argument("--log_file", help="Set the testing log file name", default="test_dataset.log")
-    parser.add_argument("--model_path", help="Set the model path", default="image2Best_Validation.h5")
+    parser.add_argument("--model_path", help="Set the model path", default="LSTMBest.h5")
 
     args = parser.parse_args()
 
