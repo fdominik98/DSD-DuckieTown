@@ -9,6 +9,38 @@ Team members:
 
 The goal of this project is to train and test a self-driving AI vehicle in the Duckie Town World simulation. During our work, we are planning to use a TensorFlow based imitation learning algorithm. We are starting out from the base project [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning) which contains utilities for data generation, data visualisation, model training and model testing. Apart from that we will use various open source Duckie Town repositories which will be mentioned as we advance. Certain components of these projects will be integrated into our own solution as we modified and expanded them with new ideas and solutions to reach better results.
 
+## Project tree
+
+~~~
+.
++-- dataGeneration
+|   +-- human.py - Manual data generation by driving in simulator 
+|   +-- automatic.py - Automatic data generation using pure pursuit
+|   +-- log_schema.py - Dataset schema model
+|   +-- log_util.py - Tool for structuring dataset entry
++-- dataVisualization
+|   +-- log_combiner.py - Tool for appending datasets
+|   +-- log_viewer.py - Tool for visualizing dataset
+|   +-- log_schema.py - Dataset schema model
++-- training
+|   +-- log_reader.py - Tool for reading dataset files
+|   +-- my_model.py - Our neural network models
+|   +-- log_schema.py - Dataset schema model
+|   +-- train.py - Script for training the model
+|   +-- trainedModel
+    |   +-- MyModelBest_Loss.h5 - Training output, best by training loss
+    |   +-- MyModelBest_Validation.h5 - Training output, best by validation loss
+|   +-- trainlogs - training results
+    |   +-- ....
++-- evaluation
+|   +-- eval.py - Script for evaluating a model on test dataset
++-- map
+|   +-- generator.py - Script for map generation
+|   +-- MyMap.yaml - Our map for training
+|   +-- MyMap_test.yaml - Our map for testing
+
+~~~
+
 ## Installing the project
 
 You can install all dependencies except for cuda tools using the following commands on linux machine:
@@ -27,9 +59,10 @@ For training a model these steps shall be done:
  1. Copy the training dataset to DSD-DuckieTown/training
  2. run the following command:
  ~~~
- python3 train.py --log_file {name_of_the_training_dataset_file_with_extension}
+ python3 train.py --log_file {name_of_the_training_dataset_file_with_extension} --model_name {model name}
  ~~~
- 3. Check the train results running this command in the project root directory:
+ The model can be MyModel for the pure convolutional model and MyModelLSTM for the LSTM model. 
+ 3. Check the train results running this command:
 
 ~~~
 tensorboard --logdir trainlogs
