@@ -29,7 +29,7 @@ For training a model these steps shall be done:
  ~~~
  python3 train.py --log_file {name_of_the_training_dataset_file_with_extension}
  ~~~
- 3. Check the train results running:
+ 3. Check the train results running this command in the project root directory:
 
 ~~~
 tensorboard --logdir trainlogs
