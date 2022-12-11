@@ -155,13 +155,13 @@ In the graphs below dark blue is the train dataset and light blue is the validat
 First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (mean squared error) function in the model.
 
 ##### Angular loss
-![angular_loss](images/Angular_loss.jpg)
+![angular_loss](images/Angular_loss_model1.jpg)
 <br>We can see that the loss is decreasing continously in the train dataset, but there is a little hill in the validation dataset. Also angular loss is bigger than linear loss
 ##### Linear loss
-![linear_loss](images/Linear_loss.jpg)
+![linear_loss](images/Linear_loss_model1.jpg)
 <br>Linear loss values are pretty little which is good, we can see when we reach epoch 14, the loss is < 0.02
 ##### Epoch loss
-![epoch_loss](images/Epoch_loss.jpg)
+![epoch_loss](images/Epoch_loss_model1.jpg)
 
 With this model we could achieve this result, but we hope we can do better.
 ### Preparing test set
@@ -202,7 +202,7 @@ Or
  - specify the --log_file {path to dataset} and
  - specify the --model_path {path to model} options while executing *python eval.py*
 #### Our evaluation result
-![Evaluation result](evaluation/evaluation_result.png)<br>
+![Evaluation result](evaluation/evaluation_result_model1.png)<br>
 In the figure above it can be seen that after executing the script on the test dataset using mean square error function the results are:
 - Linear loss: 0.1085
 - Angular loss: 0.7429
