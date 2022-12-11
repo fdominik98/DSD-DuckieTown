@@ -202,7 +202,7 @@ Or
  - specify the --log_file {path to dataset} and
  - specify the --model_path {path to model} options while executing *python eval.py*
 #### Our evaluation result
-![Evaluation result](evaluation/evaluation_result_model1.png)<br>
+![Evaluation result](images/evaluation_result_model1.png)<br>
 In the figure above it can be seen that after executing the script on the test dataset using mean square error function the results are:
 - Linear loss: 0.1085
 - Angular loss: 0.7429
