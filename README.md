@@ -77,7 +77,7 @@ Or
 #### Training results
 
 In the graphs below dark blue is the train dataset and light blue is the validation dataset. The faint lines are the original graphs and the not faint lines are the smoothed lines made by TensorBoard Smoothing with value 0,4.
-First, in all images we can see that validation loss is bigger than train loss than a few epochs later the other way around, also we used mse (mean squared error) function in the model.
+First, in all images we can see that validation loss is bigger than train loss then a few epochs later the other way around, also we used mse (mean squared error) function in the model.
 
 ##### Angular loss
 ![angular_loss](images/Angular_loss.jpg)
