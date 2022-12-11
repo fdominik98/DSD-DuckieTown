@@ -23,6 +23,12 @@ The goal of this project is to train and test a self-driving AI vehicle in the D
 |   +-- log_viewer.py - Tool for visualizing dataset
 |   +-- log_schema.py - Dataset schema model
 +-- training
+|   +-- HyperParameterOptimalization
+    |   +-- random_search_tuner - random search optimalization results
+        |   +-- ....
+    |   +-- model_for_optimalization.py - model for optimalization
+    |   +-- optimize.py - running hyper parameter optimalization
+    |   +-- ....
 |   +-- log_reader.py - Tool for reading dataset files
 |   +-- my_model.py - Our neural network models
 |   +-- log_schema.py - Dataset schema model
