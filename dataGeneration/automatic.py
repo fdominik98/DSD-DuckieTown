@@ -14,7 +14,7 @@ import sys
 import time
 
 from log_util import Logger
-from log_schema import Episode, Step
+from log_schema import Episode, Step 
 
 from typing import List
 from gym_duckietown.envs import DuckietownEnv

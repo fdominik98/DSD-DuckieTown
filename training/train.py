@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-from my_model import MyModel
+from my_model import MyModel,NewModel
 from log_reader import Reader
 
 MODEL_NAME = "MyModel"
@@ -20,10 +20,12 @@ EPOCHS = 10000
 INIT_LR = 1e-3
 BATCH_SIZE = 16
 TRAIN_PERCENT = 0.8
-LOG_FILE = "dataset.log"
+LOG_FILE = "extended_dataset.log"
+MODELTYPE=1
 
 EXPERIMENTAL = False
 OLD_DATASET = False
+STEPS=4
 
 import os
 from tensorflow.python.client import device_lib
@@ -39,22 +41,26 @@ class DuckieTrainer:
         epochs,
         init_lr,
         batch_size,
-        log_dir,
+        log_dir,        
+        model_name,
         log_file,
-        old_dataset,
-        experimental,
         split,
+        modeltype,
+        window,
     ):
+        self.modeltype=modeltype
+        self.window=window
+        self.model_name = model_name
         print("Observed TF Version: ", tf.__version__)
         print("Observed Numpy Version: ", np.__version__)
 
         self.create_dir()
 
         try:
-            self.observation, self.linear, self.angular = self.get_data(log_file, old_dataset)
+            self.observation, self.linear, self.angular = self.get_data(log_file)
         except Exception:
             try:
-                self.observation, self.linear, self.angular = self.get_data(log_file, old_dataset)
+                self.observation, self.linear, self.angular = self.get_data(log_file)
             except Exception:
                 logging.error("Loading dataset failed... exiting...")
                 exit(1)
@@ -82,14 +88,14 @@ class DuckieTrainer:
                 observation_valid,
                 {"Linear": linear_valid, "Angular": angular_valid},
             ),
-            epochs=EPOCHS,
+            epochs=epochs,
             callbacks=callbacks_list,
             shuffle=True,
-            batch_size=BATCH_SIZE,
+            batch_size=batch_size,
             verbose=0,
         )
 
-        model.save(f"trainedModel/{MODEL_NAME}.h5")
+        model.save(f"trainedModel/{self.model_name}.h5")
 
     def create_dir(self):
         try:
@@ -103,23 +109,26 @@ class DuckieTrainer:
     def configure_model(self, learning_rate, epochs):
         losses = {"Linear": "mse", "Angular": "mse"}
         lossWeights = {"Linear": 2, "Angular": 10}
-        model = MyModel.build(200, 150)
+        if self.modeltype==0:
+            model = MyModel.build(200, 150)
+        if self.modeltype==1:
+            model = NewModel.build(self.window, 200, 150)
         opt = tf.keras.optimizers.Adam(learning_rate=learning_rate)
         model.compile(optimizer=opt, loss=losses, loss_weights=lossWeights, metrics="mse")
         return model
 
     def configure_callbacks(self):
         tensorboard = tf.keras.callbacks.TensorBoard(
-            log_dir="trainlogs/{}".format(f'{MODEL_NAME}-{datetime.now().strftime("%Y-%m-%d@%H-%M-%S")}')
+            log_dir="trainlogs/{}".format(f'{self.model_name}-{datetime.now().strftime("%Y-%m-%d@%H-%M-%S")}')
         )
 
-        filepath1 = f"trainedModel/{MODEL_NAME}Best_Validation.h5"
+        filepath1 = f"trainedModel/{self.model_name}Best_Validation.h5"
         checkpoint1 = tf.keras.callbacks.ModelCheckpoint(
             filepath1, monitor="val_loss", verbose=1, save_best_only=True, mode="min"
         )
 
         # ? Keep track of the best loss model
-        filepath2 = f"trainedModel/{MODEL_NAME}Best_Loss.h5"
+        filepath2 = f"trainedModel/{self.model_name}Best_Loss.h5"
         checkpoint2 = tf.keras.callbacks.ModelCheckpoint(
             filepath2, monitor="loss", verbose=1, save_best_only=True, mode="min"
         )
@@ -133,6 +142,20 @@ class DuckieTrainer:
         reader = Reader(file_path)
 
         observation, linear, angular = reader.read() if old_dataset else reader.modern_read()
+
+        if self.modeltype==1 :
+            ########Data transformation###################
+            observation = [ observation[x:x+self.window] for x in range(0,int(len(observation)/self.window)) ]
+            print(1)
+            linear = [ linear[x:x+self.window] for x in range(0,int(len(linear)/self.window)) ]
+            print(2)
+            angular = [ angular[x:x+self.window] for x in range(0,int(len(angular)/self.window)) ]
+            print(3)
+
+            print(np.array(observation).shape)
+            print(np.array(linear).shape)
+            print(np.array(angular).shape)
+            ############# Datatransformation ###############
 
         logging.info(
             f"""Observation Length: {len(observation)}
@@ -149,6 +172,9 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", help="Set the batch size", default=BATCH_SIZE)
     parser.add_argument("--log_dir", help="Set the training log directory", default="")
     parser.add_argument("--log_file", help="Set the training log file name", default=LOG_FILE)
+    parser.add_argument("--model_name", help="Set the training log file name", default=MODEL_NAME)
+    parser.add_argument("--modeltype", help="Set modeltype", default=MODELTYPE)
+    parser.add_argument("--window", help="Set windowsize in case of LSTM", default=STEPS)
     parser.add_argument(
         "--split",
         help="Set the training and test split point (input the percentage of training)",
@@ -157,13 +183,16 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    
+
     DuckieTrainer(
         epochs=int(args.epochs),
         init_lr=float(args.learning_rate),
         batch_size=int(args.batch_size),
         log_dir=args.log_dir,
         log_file=args.log_file,
-        old_dataset=args.old_dataset,
-        experimental=args.experimental,
+        model_name = args.model_name,
         split=float(args.split),
+        modeltype=int(args.modeltype),
+        window=int(args.window)
     )

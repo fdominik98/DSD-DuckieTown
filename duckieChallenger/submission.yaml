@@ -1,0 +1,12 @@
+protocol: aido2_db18_agent-z2
+challenge:
+  - aido-hello-sim-validation
+
+#challenge: [] # This will submit to all available challenges.
+user-label: "baseline-behavior-cloning"
+user-payload:
+    features_required:
+        gpu: 1
+description: |
+    Behavior cloning baseline.
+validation_challenge: aido-hello-sim-validation

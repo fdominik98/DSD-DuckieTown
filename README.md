@@ -6,8 +6,94 @@ Team members:
 - Weyde Szabolcs - DC6KRO
 - Frey Dominik - AXHBUS
 
+[Final documentation](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/DSD_documentation.pdf)
 
 The goal of this project is to train and test a self-driving AI vehicle in the Duckie Town World simulation. During our work, we are planning to use a TensorFlow based imitation learning algorithm. We are starting out from the base project [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning) which contains utilities for data generation, data visualisation, model training and model testing. Apart from that we will use various open source Duckie Town repositories which will be mentioned as we advance. Certain components of these projects will be integrated into our own solution as we modified and expanded them with new ideas and solutions to reach better results.
+
+## Project tree
+
+~~~
+.
++-- dataGeneration
+|   +-- human.py - Manual data generation by driving in simulator 
+|   +-- automatic.py - Automatic data generation using pure pursuit
+|   +-- log_schema.py - Dataset schema model
+|   +-- log_util.py - Tool for structuring dataset entry
++-- dataVisualization
+|   +-- log_combiner.py - Tool for appending datasets
+|   +-- log_viewer.py - Tool for visualizing dataset
+|   +-- log_schema.py - Dataset schema model
++-- duckieChallenger
+|   +--  Dockerfile - Docker file aio submission
+|   +--  helperFncs - helper functions
+|   +--  Makefile - makefile file aio submission
+|   +--  my_model.py - copy of our network for submission
+|   +--  MyModelBest_Validation.h5 - trainned model
+|   +--  requirements.txt - required packages
+|   +--  solution.py - solution for aio submission
+|   +--  submissions.yaml - describer for aio submission
++-- training
+|   +-- HyperParameterOptimalization
+    |   +-- random_search_tuner - random search optimalization results
+        |   +-- ....
+    |   +-- model_for_optimalization.py - model for optimalization
+    |   +-- optimize.py - running hyper parameter optimalization
+    |   +-- ....
+|   +-- log_reader.py - Tool for reading dataset files
+|   +-- my_model.py - Our neural network models
+|   +-- log_schema.py - Dataset schema model
+|   +-- train.py - Script for training the model
+|   +-- trainedModel
+    |   +-- MyModelBest_Loss.h5 - Training output, best by training loss
+    |   +-- MyModelBest_Validation.h5 - Training output, best by validation loss
+|   +-- trainlogs - training results
+    |   +-- ....
++-- evaluation
+|   +-- eval.py - Script for evaluating a model on test dataset
++-- map
+|   +-- generator.py - Script for map generation
+|   +-- MyMap.yaml - Our map for training
+|   +-- MyMap_test.yaml - Our map for testing
++-- DSD_documentation.pdf - final documentation
+
+~~~
+
+## Installing the project
+
+You can install all dependencies except for cuda tools using the following commands on linux machine:
+
+~~~
+git clone https://github.com/fdominik98/DSD-DuckieTown.git
+cd DSD-DuckieTown
+pip3 install -e .
+pip3 install -r requirements.txt
+~~~
+
+## Using the project
+
+### Training
+
+For training a model these steps shall be done:
+ 1. Copy the training dataset to DSD-DuckieTown/training
+ 2. run the following command:
+ ~~~
+ python3 train.py --log_file {name_of_the_training_dataset_file_with_extension} --model_name {model name}
+ ~~~
+ The model can be MyModel for the pure convolutional model and NewModel for the LSTM model. 
+ 3. Check the train results running this command:
+
+~~~
+tensorboard --logdir trainlogs
+~~~
+ 
+ ### Evaluating
+ 1. Copy the test dataset to DSD-DuckieTown/evaluation
+ 2. Copy the trained .h5 model to DSD-DuckieTown/evaluation
+ 3. run the following command:
+ ~~~
+ python3 eval.py --log_file {name_of_the_test_dataset_file_with_extension} --model_path {name_of_the_trained_model_with_extension}
+ ~~~
+ 
 
 ## Milestone 1: Preparing data
 
@@ -80,13 +166,13 @@ In the graphs below dark blue is the train dataset and light blue is the validat
 First, in all images we can see that validation loss is bigger than train loss then a few epochs later the other way around, also we used mse (mean squared error) function in the model.
 
 ##### Angular loss
-![angular_loss](images/Angular_loss.jpg)
+![angular_loss](images/Angular_loss_model1.jpg)
 <br>We can see that the loss is decreasing continously in the train dataset, but there is a little hill in the validation dataset. Also angular loss is bigger than linear loss
 ##### Linear loss
-![linear_loss](images/Linear_loss.jpg)
+![linear_loss](images/Linear_loss_model1.jpg)
 <br>Linear loss values are pretty little which is good, we can see when we reach epoch 14, the loss is < 0.02
 ##### Epoch loss
-![epoch_loss](images/Epoch_loss.jpg)
+![epoch_loss](images/Epoch_loss_model1.jpg)
 
 With this model we could achieve this result, but we hope we can do better.
 ### Preparing test set
@@ -127,10 +213,37 @@ Or
  - specify the --log_file {path to dataset} and
  - specify the --model_path {path to model} options while executing *python eval.py*
 #### Our evaluation result
-![Evaluation result](evaluation/evaluation_result.png)<br>
+![Evaluation result](images/evaluation_result_model1.png)<br>
 In the figure above it can be seen that after executing the script on the test dataset using mean square error function the results are:
 - Linear loss: 0.1085
 - Angular loss: 0.7429
 - Loss: 7.6462
 
 With this first stage model the linear and angular losses one by one are not too bad, but the all in all loss is something to be improved in the next stage.
+
+## Milestone 3: Final submission
+
+### Models
+
+For the final submission we have complemented our model with LSTM layers to improve the results of the learning. We calculate the two component of the wheel controller separetly. For each network we use CNN combined with LSTM.
+
+### Training
+
+#### Train data
+For the final submission we have created a dataset with the methods explained in Milestone 2. The differences to the previous data set
+are the following: 
+- The new dataset contains more records
+- The new dataset was better in quality, since we have more experience in driving the virtual duckiebot
+#### Results
+Results with the new network and dataset are more promising than the ones subbmited to Milestone 2. The validation and the train losses during training were better. The two values were even closer to each other, which has lead us to the conclusion that the network has more powerful predicting capabilities.
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMAngularLoss.png)
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMLinearLoss.png)
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMepochloss.png)
+
+
+### Evaluation
+The evaluation on a test set was also more succesful, which had lead us to a conclusion that our model is more capable of making generally good decisions.
+
+### Summary
+
+We have concluded, that the reinforcement learning approach may have had been better in order to get better results, but we have discussed and concluded, that we have learned a lot, and acquired new skills such as working in team or maintain communication during working on this homework. 

@@ -218,7 +218,7 @@ if __name__ == "__main__":
     parser.add_argument("--draw-curve", default=False, help="draw the lane following curve")
     parser.add_argument("--draw-bbox", default=False, help="draw collision detection bounding boxes")
     parser.add_argument("--domain-rand", default=True, help="enable domain randomization")
-    parser.add_argument("--playback", default=True, help="enable playback after each session")
+    parser.add_argument("--playback", default=False, help="enable playback after each session")
     parser.add_argument("--distortion", default=True)
     parser.add_argument("--steps", default=1500, help="number of steps to record in one batch")
     parser.add_argument("--nb-episodes", default=100, help="set the total episoded number", type=int)
