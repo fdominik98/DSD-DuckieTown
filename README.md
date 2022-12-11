@@ -49,6 +49,7 @@ You can install all dependencies except for cuda tools using the following comma
 git clone https://github.com/fdominik98/DSD-DuckieTown.git
 cd DSD-DuckieTown
 pip3 install -e .
+pip3 install -r requirements.txt
 ~~~
 
 ## Using the project
