@@ -6,6 +6,7 @@ Team members:
 - Weyde Szabolcs - DC6KRO
 - Frey Dominik - AXHBUS
 
+[Final documentation](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/DSD_documentation.pdf)
 
 The goal of this project is to train and test a self-driving AI vehicle in the Duckie Town World simulation. During our work, we are planning to use a TensorFlow based imitation learning algorithm. We are starting out from the base project [Behavior Cloning](https://github.com/duckietown/challenge-aido_LF-baseline-behavior-cloning) which contains utilities for data generation, data visualisation, model training and model testing. Apart from that we will use various open source Duckie Town repositories which will be mentioned as we advance. Certain components of these projects will be integrated into our own solution as we modified and expanded them with new ideas and solutions to reach better results.
 
@@ -22,6 +23,15 @@ The goal of this project is to train and test a self-driving AI vehicle in the D
 |   +-- log_combiner.py - Tool for appending datasets
 |   +-- log_viewer.py - Tool for visualizing dataset
 |   +-- log_schema.py - Dataset schema model
++-- duckieChallenger
+|   +--  Dockerfile - Docker file aio submission
+|   +--  helperFncs - helper functions
+|   +--  Makefile - makefile file aio submission
+|   +--  my_model.py - copy of our network for submission
+|   +--  MyModelBest_Validation.h5 - trainned model
+|   +--  requirements.txt - required packages
+|   +--  solution.py - solution for aio submission
+|   +--  submissions.yaml - describer for aio submission
 +-- training
 |   +-- HyperParameterOptimalization
     |   +-- random_search_tuner - random search optimalization results
@@ -44,6 +54,7 @@ The goal of this project is to train and test a self-driving AI vehicle in the D
 |   +-- generator.py - Script for map generation
 |   +-- MyMap.yaml - Our map for training
 |   +-- MyMap_test.yaml - Our map for testing
++-- DSD_documentation.pdf - final documentation
 
 ~~~
 
