@@ -209,3 +209,30 @@ In the figure above it can be seen that after executing the script on the test d
 - Loss: 7.6462
 
 With this first stage model the linear and angular losses one by one are not too bad, but the all in all loss is something to be improved in the next stage.
+
+## Milestone 3: Final submission
+
+### Models
+
+For the final submission we have complemented our model with LSTM layers to improve the results of the learning. We calculate the two component of the wheel controller separetly. For each network we use CNN combined with LSTM.
+
+### Training
+
+#### Train data
+For the final submission we have created a dataset with the methods explained in Milestone 2. The differences to the previous data set
+are the following: 
+- The new dataset contains more records
+- The new dataset was better in quality, since we have more experience in driving the virtual duckiebot
+#### Results
+Results with the new network and dataset are more promising than the ones subbmited to Milestone 2. The validation and the train losses during training were better. The two values were even closer to each other, which has lead us to the conclusion that the network has more powerful predicting capabilities.
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMAngularLoss.png)
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMLinearLoss.png)
+![Evaluation result](https://github.com/fdominik98/DSD-DuckieTown/blob/milestone_3/images/LSTMepochloss.png)
+
+
+### Evaluation
+The evaluation on a test set was also more succesful, which had lead us to a conclusion that our model is more capable of making generally good decisions.
+
+### Summary
+
+We have concluded, that the reinforcement learning approach may have had been better in order to get better results, but we have discussed and concluded, that we have learned a lot, and acquired new skills such as working in team or maintain communication during working on this homework. 
