@@ -16,6 +16,6 @@ RUN python3 -m pip install  -r .requirements.txt
 # Copy all solution files to workspace
 WORKDIR /submission
 COPY *.py ./
-COPY MyModelBest_Validation.h5 .
+COPY LSTMBest.h5 .
 
 ENTRYPOINT ["python3", "solution.py"]
