@@ -62,7 +62,7 @@ For training a model these steps shall be done:
  ~~~
  python3 train.py --log_file {name_of_the_training_dataset_file_with_extension} --model_name {model name}
  ~~~
- The model can be MyModel for the pure convolutional model and MyModelLSTM for the LSTM model. 
+ The model can be MyModel for the pure convolutional model and NewModel for the LSTM model. 
  3. Check the train results running this command:
 
 ~~~
